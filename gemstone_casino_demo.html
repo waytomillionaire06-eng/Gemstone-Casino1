@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#10100f">
+<title>Gemstone Casino — Demo</title>
+<style>
+:root{--bg:#0d0e0e;--panel:#171918;--panel2:#202321;--gold:#d8b45c;--gold2:#f4dc91;--muted:#9da39c;--line:#343832;--green:#63c98a;--red:#ed7777}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -20%,#3a3020 0,#141512 42%,#0b0c0c 80%);color:#f5f2e9;font:15px system-ui,-apple-system,Segoe UI,Roboto,sans-serif;min-height:100vh}
+.wrap{max-width:520px;margin:auto;padding:16px 14px 94px}.top{display:flex;justify-content:space-between;align-items:center;padding:8px 2px 18px}.brand{display:flex;align-items:center;gap:10px;font-weight:850;letter-spacing:1.5px}.gem{width:38px;height:38px;display:grid;place-items:center;border:1px solid #8b713a;border-radius:12px;background:linear-gradient(145deg,#5e4a22,#17150f);color:var(--gold2);font-size:21px;box-shadow:0 0 24px #d8b45c22}.demo{font-size:10px;letter-spacing:1.3px;color:#17140b;background:linear-gradient(90deg,var(--gold),var(--gold2));padding:6px 9px;border-radius:20px;font-weight:900}
+.balance{background:linear-gradient(120deg,#29251b,#171a17 65%);border:1px solid #5c4b2a;border-radius:20px;padding:18px;margin-bottom:17px;position:relative;overflow:hidden}.balance:after{content:"✧";position:absolute;right:20px;top:0;font-size:100px;color:#d8b45c12}.small{color:var(--muted);font-size:12px}.amount{font-size:32px;font-weight:850;letter-spacing:.5px;margin:4px 0 12px;color:var(--gold2)}.balance-foot{display:flex;gap:8px;flex-wrap:wrap}.pill{border:1px solid #625332;border-radius:30px;padding:7px 10px;color:#dfc985;font-size:11px}
+.notice{border:1px solid #66542d;background:#282317;color:#e9d69c;padding:10px 12px;border-radius:12px;font-size:12px;line-height:1.45;margin:0 0 18px}
+.section-head{display:flex;justify-content:space-between;align-items:end;margin:20px 2px 11px}.section-head h2{font-size:17px;margin:0}.section-head span{font-size:11px;color:var(--muted)}
+.games{display:grid;grid-template-columns:repeat(2,1fr);gap:11px}.game{border:1px solid var(--line);background:linear-gradient(145deg,#202420,#141715);border-radius:17px;padding:15px;text-align:left;color:white;min-height:126px;cursor:pointer;transition:.15s}.game:active{transform:scale(.98)}.game .emoji{font-size:28px;margin-bottom:10px}.game b{display:block;font-size:14px}.game small{display:block;margin-top:4px;color:var(--muted);font-size:11px}
+.view{display:none}.view.active{display:block}.back{border:0;background:none;color:var(--gold2);padding:7px 0 14px;font-size:13px;cursor:pointer}.box{border:1px solid var(--line);background:var(--panel);border-radius:18px;padding:17px;margin-bottom:12px}.game-title{text-align:center;font-size:20px;font-weight:800;margin:3px 0 5px}.sub{text-align:center;color:var(--muted);font-size:12px;margin-bottom:16px}
+.reels{display:flex;justify-content:center;gap:9px;margin:18px 0}.reel{width:76px;height:78px;border-radius:15px;background:linear-gradient(145deg,#30342e,#101310);border:1px solid #625332;display:grid;place-items:center;font-size:39px;box-shadow:inset 0 0 18px #0008}
+.controls{display:flex;gap:9px;align-items:center;justify-content:center;flex-wrap:wrap}.input{background:#101311;color:white;border:1px solid #41483f;border-radius:10px;padding:11px;width:112px;font:inherit}.btn{border:0;border-radius:12px;background:linear-gradient(100deg,#b88d39,#f0d681);color:#19150b;font-weight:850;padding:12px 18px;cursor:pointer}.btn.secondary{background:#2a302b;color:#e8d59c;border:1px solid #64532f}.btn:disabled{opacity:.45}.result{text-align:center;min-height:26px;margin-top:14px;font-weight:700}.green{color:var(--green)}.red{color:var(--red)}
+.roulette{width:210px;height:210px;margin:15px auto;border-radius:50%;transition:transform 3.2s cubic-bezier(.12,.72,.12,1);border:9px solid #b38b3e;background:conic-gradient(#b52e32 0 30deg,#151816 30deg 60deg,#b52e32 60deg 90deg,#151816 90deg 120deg,#b52e32 120deg 150deg,#151816 150deg 180deg,#b52e32 180deg 210deg,#151816 210deg 240deg,#b52e32 240deg 270deg,#151816 270deg 300deg,#b52e32 300deg 330deg,#176b45 330deg 360deg);display:grid;place-items:center;box-shadow:0 0 25px #000}.roulette span{background:#111;border:2px solid #d4b45e;border-radius:50%;width:74px;height:74px;display:grid;place-items:center;font-size:24px;font-weight:900}
+.cards{display:flex;justify-content:center;gap:9px;min-height:94px;margin:15px 0}.card{background:#f8f5ec;color:#181818;border-radius:10px;width:58px;height:82px;display:grid;place-items:center;font-size:22px;font-weight:800;box-shadow:0 4px 12px #0008}.card.redcard{color:#c42e39}
+.bottom{position:fixed;bottom:0;left:0;right:0;background:#111412ed;border-top:1px solid var(--line);backdrop-filter:blur(12px);display:flex;justify-content:center;gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom));z-index:5}.nav{background:none;border:0;color:#9da39c;font-size:11px;padding:5px 12px;cursor:pointer}.nav span{display:block;font-size:19px;margin-bottom:3px}.nav.active{color:var(--gold2)}
+.history{font-size:12px;color:var(--muted);line-height:1.8}.profile-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line);font-size:13px}.profile-row:last-child{border:0}
+@media(max-width:360px){.reel{width:65px}.games{gap:8px}.game{padding:12px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top"><div class="brand"><div class="gem">◆</div><div>GEMSTONE<br><span style="font-size:9px;color:var(--gold);letter-spacing:3px">CASINO</span></div></div><div class="demo">DEMO MODE</div></header>
+<div id="home" class="view active">
+ <section class="balance"><div class="small">ДЕМО-БАЛАНС</div><div class="amount"><span id="balance">10 000</span> <span style="font-size:15px">◆</span></div><div class="balance-foot"><span class="pill">Только виртуальные монеты</span><span class="pill">Без пополнения и вывода</span></div></section>
+ <div class="notice">Это демонстрационная версия: монеты виртуальные, не имеют денежной стоимости и не могут быть куплены, проданы или выведены.</div>
+ <div class="section-head"><h2>Игры</h2><span>Выбери игру</span></div>
+ <div class="games">
+  <button class="game" onclick="openGame('slots')"><div class="emoji">🎰</div><b>Слоты</b><small>Три барабана · демо</small></button>
+  <button class="game" onclick="openGame('roulette')"><div class="emoji">🎡</div><b>Рулетка</b><small>Красное, чёрное или зеро</small></button>
+  <button class="game" onclick="openGame('blackjack')"><div class="emoji">🃏</div><b>Blackjack</b><small>Набери ближе к 21</small></button>
+  <button class="game" onclick="showPage('profile')"><div class="emoji">💎</div><b>Профиль</b><small>Статистика и история</small></button>
+ </div>
+</div>
+<section id="slots" class="view"><button class="back" onclick="showPage('home')">← Назад</button><div class="box"><div class="game-title">🎰 Слоты</div><div class="sub">Три одинаковых символа — выигрыш</div><div class="reels"><div class="reel" id="r1">🍒</div><div class="reel" id="r2">🍋</div><div class="reel" id="r3">💎</div></div><div class="controls"><label class="small">Ставка<br><input class="input" id="slotBet" type="number" min="10" max="1000" step="10" value="100"></label><button class="btn" onclick="spinSlots()">Крутить</button></div><div class="result" id="slotResult"></div></div></section>
+<section id="roulette" class="view"><button class="back" onclick="showPage('home')">← Назад</button><div class="box"><div class="game-title">🎡 Рулетка</div><div class="sub">Выбери цвет и проверь удачу</div><div class="roulette"><span id="rouletteNum">?</span></div><div class="controls"><label class="small">Ставка<br><input class="input" id="rouletteBet" type="number" min="10" max="1000" step="10" value="100"></label><label class="small">Ставка на<br><select class="input" id="roulettePick"><option value="red">Красное</option><option value="black">Чёрное</option><option value="green">Зеро</option></select></label><button class="btn" onclick="spinRoulette()">Крутить</button></div><div class="result" id="rouletteResult"></div></div></section>
+<section id="blackjack" class="view"><button class="back" onclick="showPage('home')">← Назад</button><div class="box"><div class="game-title">🃏 Blackjack</div><div class="sub">Набери 21 или ближе, не перебрав</div><div class="small" style="text-align:center">Дилер</div><div class="cards" id="dealerCards"></div><div class="small" style="text-align:center">Твои карты</div><div class="cards" id="playerCards"></div><div class="controls" id="bjStart"><label class="small">Ставка<br><input class="input" id="bjBet" type="number" min="10" max="1000" step="10" value="100"></label><button class="btn" onclick="startBJ()">Начать</button></div><div class="controls" id="bjPlay" style="display:none"><button class="btn" onclick="hitBJ()">Ещё карту</button><button class="btn secondary" onclick="standBJ()">Хватит</button></div><div class="result" id="bjResult"></div></div></section>
+<section id="profile" class="view"><button class="back" onclick="showPage('home')">← На главную</button><div class="box"><div class="game-title">💎 Профиль игрока</div><div class="profile-row"><span>Демо-баланс</span><b id="profileBalance">10 000 ◆</b></div><div class="profile-row"><span>Сыграно раундов</span><b id="rounds">0</b></div><div class="profile-row"><span>Режим</span><b>Демо</b></div><div class="profile-row"><span>Игрок</span><b>Guest</b></div></div><div class="box"><div class="section-head"><h2>История</h2><button class="nav" onclick="resetDemo()">Сбросить демо</button></div><div id="history" class="history">Пока нет игр</div></div></section>
+</div>
+<nav class="bottom"><button class="nav active" id="navHome" onclick="showPage('home')"><span>⌂</span>Главная</button><button class="nav" onclick="openGame('slots')"><span>🎰</span>Игры</button><button class="nav" onclick="showPage('profile')"><span>♙</span>Профиль</button></nav>
+<script>
+const startBalance=10000;let balance=Number(localStorage.getItem('gem_demo_balance')||startBalance),rounds=Number(localStorage.getItem('gem_demo_rounds')||0),history=JSON.parse(localStorage.getItem('gem_demo_history')||'[]');
+const $=id=>document.getElementById(id);function save(){localStorage.setItem('gem_demo_balance',balance);localStorage.setItem('gem_demo_rounds',rounds);localStorage.setItem('gem_demo_history',JSON.stringify(history));render()}
+function render(){$('balance').textContent=balance.toLocaleString('ru-RU');$('profileBalance').textContent=balance.toLocaleString('ru-RU')+' ◆';$('rounds').textContent=rounds;$('history').innerHTML=history.length?history.slice(0,12).map(x=>`<div>${x}</div>`).join(''):'Пока нет игр'}
+function log(s){history.unshift(new Date().toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'})+' · '+s);rounds++;save()}
+function showPage(id){document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));$(id).classList.add('active');document.querySelectorAll('.nav').forEach(x=>x.classList.remove('active'));if(id==='home')$('navHome').classList.add('active');render()}
+function openGame(id){showPage(id)}
+function getBet(id){let v=Number($(id).value);if(!Number.isInteger(v)||v<10||v>1000||v>balance){alert('Ставка должна быть от 10 до 1000 монет и не превышать баланс.');return 0}return v}
+function spinSlots(){let bet=getBet('slotBet');if(!bet)return;balance-=bet;let icons=['🍒','🍋','🍇','🔔','⭐','💎','7️⃣'];let a=[0,1,2].map(()=>icons[Math.floor(Math.random()*icons.length)]);['r1','r2','r3'].forEach((id,i)=>$(id).textContent=a[i]);let mult=a.every(x=>x===a[0])?(a[0]==='💎'?8:a[0]==='7️⃣'?6:4):(new Set(a).size===2?1.5:0);let win=Math.floor(bet*mult);balance+=win;$('slotResult').innerHTML=win>bet?`<span class="green">Выигрыш +${win} ◆</span>`:win?`Возврат ${win} ◆`:`<span class="red">Не повезло −${bet} ◆</span>`;log('Слоты: '+a.join(' ')+' · '+(win>bet?'+'+(win-bet):'−'+(bet-win))+' ◆')}
+let rouletteRotation=0,rouletteBusy=false;
+function spinRoulette(){
+ if(rouletteBusy)return;
+ let bet=getBet('rouletteBet');if(!bet)return;
+ rouletteBusy=true;
+ const spinButton=document.querySelector('#roulette .btn');
+ spinButton.disabled=true;
+ balance-=bet;
+ let n=Math.floor(Math.random()*37),color=n===0?'green':n%2?'red':'black',pick=$('roulettePick').value;
+ let win=color===pick?bet*(color==='green'?14:2):0;
+ balance+=win;
+ $('rouletteResult').textContent='Рулетка вращается…';
+ $('rouletteNum').textContent='•';
+ rouletteRotation+=1440+Math.floor(Math.random()*720)+Math.floor((n/37)*360);
+ $('roulette').style.transform='rotate('+rouletteRotation+'deg)';
+ save();
+ setTimeout(()=>{
+   $('rouletteNum').textContent=n;
+   $('rouletteResult').innerHTML=win?`<span class="green">Выигрыш +${win} ◆</span>`:`<span class="red">Не повезло −${bet} ◆</span>`;
+   log('Рулетка: '+n+' '+color+' · '+(win?'+'+(win-bet):'−'+bet)+' ◆');
+   spinButton.disabled=false;
+   rouletteBusy=false;
+ },3300);
+}
+let player=[],dealer=[],bjBet=0,bjActive=false;function draw(){let n=Math.floor(Math.random()*13)+1;return {n,v:n>10?10:n,s:['♠','♥','♦','♣'][Math.floor(Math.random()*4)]}}function total(a){let t=a.reduce((s,c)=>s+c.v,0),aces=a.filter(c=>c.n===1).length;while(aces&&t+10<=21){t+=10;aces--}return t}function showCards(id,a,hide=false){$(id).innerHTML=a.map((c,i)=>`<div class="card ${c.s==='♥'||c.s==='♦'?'redcard':''}">${hide&&i===1?'?':(c.n===1?'A':c.n===11?'J':c.n===12?'Q':c.n===13?'K':c.n)+c.s}</div>`).join('')}
+function startBJ(){bjBet=getBet('bjBet');if(!bjBet)return;balance-=bjBet;player=[draw(),draw()];dealer=[draw(),draw()];bjActive=true;showCards('playerCards',player);showCards('dealerCards',dealer,true);$('bjStart').style.display='none';$('bjPlay').style.display='flex';$('bjResult').textContent='Твой счёт: '+total(player);if(total(player)===21)standBJ();save()}
+function hitBJ(){if(!bjActive)return;player.push(draw());showCards('playerCards',player);$('bjResult').textContent='Твой счёт: '+total(player);if(total(player)>21)finishBJ()}
+function standBJ(){if(!bjActive)return;while(total(dealer)<17)dealer.push(draw());showCards('dealerCards',dealer);finishBJ()}
+function finishBJ(){bjActive=false;let p=total(player),d=total(dealer),win=p<=21&&(d>21||p>d),tie=p===d&&p<=21;if(win)balance+=bjBet*2;else if(tie)balance+=bjBet;$('bjPlay').style.display='none';$('bjStart').style.display='flex';$('bjResult').innerHTML=(win?'<span class="green">Победа! +'+(bjBet*2)+' ◆</span>':tie?'Ничья — ставка возвращена.':'<span class="red">Дилер победил.</span>')+'<br>Твой счёт: '+p+' · Дилер: '+d;log('Blackjack: '+(win?'победа +'+bjBet:tie?'ничья':'проигрыш −'+bjBet)+' ◆')}
+function resetDemo(){if(!confirm('Сбросить баланс и историю демо?'))return;balance=startBalance;rounds=0;history=[];save();showPage('profile')}
+render();
+</script>
+</body></html>
